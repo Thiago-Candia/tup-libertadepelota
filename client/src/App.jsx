@@ -14,12 +14,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route
           path="/login"
           element={isAuthenticated ? <Navigate to="/" /> : <Login />}
         />
-
         <Route
           path="/"
           element={
@@ -28,11 +26,9 @@ function App() {
             </ProtectedRoute>
           }
         >
-          {/* Rutas hijas */}
           <Route index element={<Items />} />
           <Route path="settings" element={<Settings />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   );

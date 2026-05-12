@@ -9,8 +9,8 @@ export default function MatchCard({ match }) {
           <span>{match.teams.home.name}</span>
         </div>
 
-        <div className="text-center">
-          <span className="font-bold">
+        <div className="flex flex-col items-center">
+          <span className="text-4xl font-black text-white">
             {match.goals.home} - {match.goals.away}
           </span>
         </div>

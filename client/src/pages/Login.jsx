@@ -4,13 +4,17 @@ import { useAuth } from "../context/AuthContext.jsx"
 import {Button, CircularProgress, Divider} from '@mui/material'
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase_config.js";
+import {Button, CircularProgress} from '@mui/material'
 import logo from '../assets/images/logo.png'
 
 
 export default function Login(){
 
   const [loading, setLoading] = useState(false)
+
   const [googleLoading, setGoogleLoading] = useState(false)
+
+
   const { login } = useAuth()
   const navigate = useNavigate();
 
@@ -23,6 +27,7 @@ export default function Login(){
     }, 2000);
   }
 
+
   const handleGoogleLogin = async () => {
     setGoogleLoading(true);
     try {
@@ -33,6 +38,7 @@ export default function Login(){
       setGoogleLoading(false);
     }
   }
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 gap-8">
@@ -46,6 +52,7 @@ export default function Login(){
         disabled={loading}
         startIcon={loading ? <CircularProgress size={18} color="inherit"/> : null}
       >
+
         {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
       </Button>
 
@@ -88,6 +95,8 @@ export default function Login(){
         }}
       >
         {googleLoading ? 'Conectando...' : 'Iniciar sesión con Google'}
+
+        {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
       </Button>
     </div>
   )

@@ -1,6 +1,9 @@
+
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
 import { auth } from "../firebase_config.js";
+import React, { createContext, useState, useContext } from "react";
+
 
 
 const AuthContext = createContext(null);
@@ -9,6 +12,7 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem("session") === "true";
   })
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -47,12 +51,17 @@ export function AuthProvider({ children }) {
     }
     sessionStorage.removeItem("session");
     setUser(null);
+  const logout = () => {
+    sessionStorage.removeItem("session");
     setIsAuthenticated(false);
   }
 
 
   return (
+
     <AuthContext.Provider value={{isAuthenticated, user, loading, login, logout}}>
+    <AuthContext.Provider value={{isAuthenticated, login, logout}}>
+
       {children}
     </AuthContext.Provider>
   )

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MatchCard from "../components/MatchCard";
 import { useMatches } from "../hooks/useMatches";
 import {Button, CircularProgress } from '@mui/material'
 
 export default function Items() {
+  const loaderRef = useRef(null)
 
   const { matches, loading, error } = useMatches();
-
+  const [loadingMore, setLoadingMore] = useState(false)
   const [search, setSearch] = useState("")
   const [sort, setSort] = useState("date")
   const [limit, setLimit] = useState(10);
@@ -36,6 +37,31 @@ const sortedMatches = [...filteredMatches].sort((a,b) => {
   }
   return 0;
 })
+
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    const target = entries[0]
+
+    if(target.isIntersecting && limit < sortedMatches.length) {
+      setLoadingMore(true)
+
+      setTimeout(() => {
+        setLimit((prev) => prev + 10) 
+        setLoadingMore(false)
+        }, 800) 
+      }
+    })
+
+    if(loaderRef.current){
+      observer.observe(loaderRef.current)
+    }
+
+    return () => {
+      if(loaderRef.current){
+        observer.unobserve(loaderRef.current)
+      }
+    }
+}, [limit, sortedMatches.length])
 
   if (loading) {
     return (
@@ -86,16 +112,11 @@ const sortedMatches = [...filteredMatches].sort((a,b) => {
         <MatchCard key={match.fixture.id} match={match}/>
       ))}
 
-    <Button
-        variant="contained"
-        onClick={() => setLimit(prev => prev + 50)}
-        sx={{
-          backgroundColor: 'var(--color-primary)',
-          '&:hover': { backgroundColor: '#4a6f4c' }
-        }}
-      >
-        Ver más
-    </Button>
+    <div ref={loaderRef} className="flex justify-center py-6">
+      {loadingMore && (
+        <CircularProgress size={28} sx={{ color: "var(--color-primary)" }} />
+      )}
+    </div>
     </div>
   )
 }

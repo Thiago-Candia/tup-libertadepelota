@@ -53,27 +53,36 @@ const sortedMatches = [...filteredMatches].sort((a,b) => {
         <span>Partidos</span>
       </h2>
 
-    <div>
+    <div  className="flex items-center gap-4">
+      <select 
+        value={sort} 
+        onChange={(e) => setSort(e.target.value)}
+        className="h-[3rem] px-4 rounded bg-white/10 text-base min-w-[12rem]"
+      >
+        <option value="date" className='bg-slate-800 text-white'>
+          Fecha
+        </option>
+
+        <option value="home" className='bg-slate-800 text-white'>
+          Equipo Local
+        </option>
+
+        <option value="away" className='bg-slate-800 text-white'>
+          Equipo Visitante
+        </option>
+
+        <option value="score" className='bg-slate-800 text-white'>
+          Goles totales
+        </option>
+      </select>
+
       <input 
         type="text"
         placeholder="buscar equipo..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="p-2 rounded bg-white/10"
-        />
-    </div>
-
-    <div>
-      <select 
-        value={sort} 
-        onChange={(e) => setSort(e.target.value)}
-        className="p-2 rounded bg-white/10"
-      >
-        <option value="date" className='bg-slate-800 text-white'>Fecha</option>
-        <option value="home"  className='bg-slate-800 text-white'>Equipo Local</option>
-        <option value="away" className='bg-slate-800 text-white'>Equipo Visitante</option>
-        <option value="score" className='bg-slate-800 text-white'>Goles totales</option>
-      </select>
+        className="flex-1 h-[3rem] px-4 rounded bg-white/10 text-base"
+      />
     </div>
 
     {sortedMatches.length === 0 && !loading && (

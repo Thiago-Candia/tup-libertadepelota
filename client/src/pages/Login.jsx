@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext.jsx"
 import {Button, CircularProgress, Divider} from '@mui/material'
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase_config.js";
-import {Button, CircularProgress} from '@mui/material'
 import logo from '../assets/images/logo.png'
 
 

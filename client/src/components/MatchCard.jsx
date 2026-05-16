@@ -20,9 +20,6 @@ export default function MatchCard({ match }) {
 
   return (
     <div className={`p-4 rounded-xl border ${cardBorder} ${cardBg}`}>
-    <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-      <p>{new Date(match.fixture.date).toLocaleDateString()}</p>
-    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
       <p>
         {formatMatchDate(match.fixture.date)}
       </p>
@@ -33,12 +30,6 @@ export default function MatchCard({ match }) {
           <span className={homeWins ? 'text-winner font-bold' : awayWins ? 'text-loser' : ''}>
             {match.teams.home.name}
           </span>
-      <div className="grid grid-cols-3 items-center text-center">
-        <div className="flex flex-col items-center gap-3 min-w-0">
-          <img src={match.teams.home.logo} className="w-16 h-16" alt="local" />
-          <h3 className="font-bold uppercase text-sm md:text-base truncate max-w-full">
-            {match.teams.home.name}
-          </h3>
         </div>
 
         <div className="flex flex-col items-center">
@@ -58,11 +49,6 @@ export default function MatchCard({ match }) {
             {match.teams.away.name}
           </span>
           <img src={match.teams.away.logo} className="w-6 h-6" alt="visitante" />
-      <div className="flex flex-col items-center gap-3 min-w-0">
-          <img src={match.teams.away.logo} className="w-16 h-16" alt="visitante" />
-          <h3 className="font-bold uppercase text-sm md:text-base truncate max-w-full">
-            {match.teams.away.name}
-          </h3>
         </div>
       </div>
 

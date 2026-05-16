@@ -1,7 +1,11 @@
+import { formatMatchDate } from "../utils/formatDate";
+
 export default function MatchCard({ match }) {
   return (
     <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-      <p>{new Date(match.fixture.date).toLocaleDateString()}</p>
+      <p>
+        {formatMatchDate(match.fixture.date)}
+      </p>
 
       <div className="grid grid-cols-3 items-center">
         <div className="flex items-center gap-2 justify-start">
